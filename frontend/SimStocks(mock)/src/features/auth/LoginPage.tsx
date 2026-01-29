@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 const LoginPage: React.FC = () => {
   // 'login' or 'signup' determines which box is expanded
   const [activeTab, setActiveTab] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
   const handleAuth = (e: React.FormEvent) => {
     e.preventDefault();
     navigate("/dashboard");
@@ -16,28 +17,21 @@ const LoginPage: React.FC = () => {
   return (
     <div className="flex min-h-screen bg-white font-sans text-black">
       {/* LEFT PANEL - Brand Section */}
-      <div className="hidden lg:flex w-[35%] bg-[#3B9DF2] flex-col justify-center px-12 relative overflow-hidden">
+      <div className="hidden lg:flex w-[35%] bg-[#3B9DF2] flex-col justify-center relative overflow-hidden">
         <div className="z-10">
-          <h2 className="text-white text-4xl font-bold mb-2">Welcome to</h2>
-          <h1 className="text-white text-7xl font-bold tracking-tight">
+          <h2 className="text-white text-5xl px-12 font-bold mb-2">
+            Welcome to
+          </h2>
+          <h1 className="text-white text-7xl px-12 font-bold tracking-tight">
             SimStocks
           </h1>
         </div>
-        <div className="absolute bottom-[-10%] left-[-10%] opacity-100 transform">
-          <svg
-            width="500"
-            height="500"
-            viewBox="0 0 60 60"
-            fill="none"
-            stroke="white"
-            strokeWidth="5"
-          >
-            <path
-              d="M7 45L45 7M45 7H24M45 7V25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+        <div className="w-190 h-110 ">
+          <img
+            src="/Logo 1.png"
+            alt="Logo"
+            className="w-160 h-160 object-contain"
+          />
         </div>
       </div>
 
@@ -61,10 +55,13 @@ const LoginPage: React.FC = () => {
               <form onSubmit={handleAuth} className="space-y-6">
                 <div>
                   <label className="block text-[16px] font-medium mb-2">
-                    Email Address/Phone Number
+                    Email Address:
                   </label>
                   <input
-                    type="text"
+                    type="email"
+                    // type={isPhone(value) ? "tel": "email"}
+                    required
+                    // value={value}
                     placeholder="Type here"
                     className="w-full p-4 rounded-xl border border-gray-300 focus:border-[#3B9DF2] outline-none"
                     value={email}
@@ -72,20 +69,27 @@ const LoginPage: React.FC = () => {
                   />
                 </div>
                 <div className="relative">
-                  <label className="block text-[16px] font-medium mb-2">
+                  <label className="text-[16px] font-medium mb-2 block">
                     Your Password
                   </label>
+
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Type here"
-                    className="w-full p-4 rounded-xl border border-gray-300 focus:border-[#3B9DF2] outline-none"
+                    className="w-full p-4 pr-12 rounded-xl border border-gray-300 focus:border-[#3B9DF2] outline-none"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <span className="absolute right-4 top-13 text-gray-400 cursor-pointer">
-                    👁️
-                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="absolute right-4 top-[52px] text-gray-500 hover:text-gray-700"
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
                 </div>
+
                 <div className="flex items-center justify-between">
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input
@@ -100,7 +104,7 @@ const LoginPage: React.FC = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-[#3B9DF2] text-white font-bold py-5 rounded-full text-2xl shadow-lg"
+                  className="w-full bg-white border-3 border-[#3B9DF2] text-[#3B9DF2] hover:bg-[#3B9DF2] hover:text-white font-bold py-5 rounded-full text-2xl shadow-lg transition-all duration-300 transform active:scale-[0.98]"
                 >
                   Log in
                 </button>
@@ -129,15 +133,25 @@ const LoginPage: React.FC = () => {
             </button>
 
             <div
-              className={`px-10 space-y-6 transition-all duration-500 overflow-hidden ${activeTab === "signup" ? "max-h-125 opacity-100" : "max-h-0 opacity-0"}`}
+              className={`px-10 space-y-6 transition-all  duration-500 overflow-hidden ${activeTab === "signup" ? "max-h-125 opacity-100" : "max-h-0 opacity-0"}`}
             >
               <form onSubmit={handleAuth} className="space-y-6">
                 <div>
                   <label className="block text-[16px] font-medium mb-2">
-                    Email Address
+                    Full Name
                   </label>
                   <input
                     type="text"
+                    placeholder="Type here"
+                    className="w-full p-4 rounded-xl border border-gray-300 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[16px] font-medium mb-2">
+                    Email Address:
+                  </label>
+                  <input
+                    type="email"
                     placeholder="Type here"
                     className="w-full p-4 rounded-xl border border-gray-300 outline-none"
                   />
@@ -154,7 +168,7 @@ const LoginPage: React.FC = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-[#3B9DF2] text-white font-bold py-5 rounded-full text-2xl shadow-lg"
+                  className="w-full bg-white border-3 border-[#3B9DF2] text-[#3B9DF2] hover:bg-[#3B9DF2] hover:text-white font-bold py-5 rounded-full text-2xl shadow-lg transition-all duration-300 transform active:scale-[0.98]"
                 >
                   Sign Up
                 </button>
