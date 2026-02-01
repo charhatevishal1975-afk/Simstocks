@@ -1,14 +1,12 @@
 import React from "react";
+import { MOCK_TRADES } from "../../constants/mockData";
+const TRENDING_STOCKS = MOCK_TRADES;
+// Define the interface for props
+interface HomeViewProps {
+  onStockSelect: (symbol: string) => void;
+}
 
-const TRENDING_STOCKS = [
-  { symbol: "BTC", name: "BTC/USD", price: "₹1000", change: "+10.11" },
-  { symbol: "ETH", name: "ETH/USD", price: "₹2500", change: "+5.24" },
-  { symbol: "SOL", name: "SOL/USD", price: "₹120", change: "-2.10" },
-  { symbol: "AAPL", name: "Apple Inc.", price: "₹180", change: "+0.45" },
-  { symbol: "TSLA", name: "Tesla Inc.", price: "₹210", change: "-4.30" },
-];
-
-const HomeView: React.FC = () => {
+const HomeView: React.FC<HomeViewProps> = ({ onStockSelect }) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 animate-in fade-in duration-500">
       <div className="lg:col-span-2 space-y-6">
@@ -36,7 +34,7 @@ const HomeView: React.FC = () => {
         <p className="text-xl text-gray-700 leading-relaxed font-medium px-2">
           Welcome to SimStocks. Trade real-time market trends with zero risk and
           master your strategy using virtual currency.
-        </p>
+        </p>  
       </div>
 
       <div className="space-y-4">
@@ -46,6 +44,7 @@ const HomeView: React.FC = () => {
             <div
               key={index}
               className="flex items-center justify-between bg-gray-50 p-4 rounded-2xl hover:bg-gray-100 transition cursor-pointer"
+              onClick={() => onStockSelect(stock.symbol)}
             >
               <div className="flex items-center gap-4">
                 <div className="bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl">

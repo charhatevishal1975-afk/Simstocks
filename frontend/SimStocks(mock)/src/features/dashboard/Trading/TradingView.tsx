@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
-import AssetSidebar from './AssetSidebar';
-import MarketChart from './MarketChart';
-import OrderPanel from './OrderPanel';
-import ConfirmTradeModal from './ConfirmTradeModal';
+import React, { useState } from "react";
+import AssetSidebar from "./AssetSidebar";
+import MarketChart from "./MarketChart";
+import OrderPanel from "./OrderPanel";
+import ConfirmTradeModal from "./ConfirmTradeModal";
 
-const TradingView: React.FC = () => {
+interface TradingViewProps {
+  symbol: string;
+}
+
+const TradingView: React.FC<TradingViewProps> = ({ symbol }) => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  
+
   // In a real app, these would be updated by the OrderPanel
   const [tradeDetails] = useState({
-    symbol: 'BTC',
+    symbol: symbol,
     amount: 5000,
     leverage: 10,
-    side: 'buy' as const
+    side: "buy" as const,
   });
 
   const handleExecuteTrade = () => {
@@ -27,11 +31,11 @@ const TradingView: React.FC = () => {
       </div>
 
       <div className="lg:col-span-2 space-y-4">
-        <MarketChart />
+        <MarketChart symbol={symbol} />
         <OrderPanel onOpenTrade={() => setIsConfirmOpen(true)} />
       </div>
 
-      <ConfirmTradeModal 
+      <ConfirmTradeModal
         isOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
         onConfirm={handleExecuteTrade}

@@ -74,6 +74,7 @@ const LoginPage: React.FC = () => {
                   </label>
 
                   <input
+                    required
                     type={showPassword ? "text" : "password"}
                     placeholder="Type here"
                     className="w-full p-4 pr-12 rounded-xl border border-gray-300 focus:border-[#3B9DF2] outline-none"
@@ -142,6 +143,7 @@ const LoginPage: React.FC = () => {
                   </label>
                   <input
                     type="text"
+                    required
                     placeholder="Type here"
                     className="w-full p-4 rounded-xl border border-gray-300 outline-none"
                   />
@@ -152,6 +154,7 @@ const LoginPage: React.FC = () => {
                   </label>
                   <input
                     type="email"
+                    required
                     placeholder="Type here"
                     className="w-full p-4 rounded-xl border border-gray-300 outline-none"
                   />
@@ -161,6 +164,7 @@ const LoginPage: React.FC = () => {
                     Choose Password
                   </label>
                   <input
+                    required
                     type="password"
                     placeholder="Type here"
                     className="w-full p-4 rounded-xl border border-gray-300 outline-none"

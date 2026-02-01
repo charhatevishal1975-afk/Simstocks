@@ -1,36 +1,8 @@
 import React, { useState } from "react";
+import { MOCK_TRADES } from "../../../constants/mockData";
 
 // Mock data representing the sorting logic (Profitability: High to Low)
-const MOCK_MARKET = [
-  {
-    symbol: "BTC",
-    name: "BTC/USD",
-    price: "₹1000",
-    change: "+10.11",
-    profitRank: 1,
-  },
-  {
-    symbol: "ETH",
-    name: "ETH/USD",
-    price: "₹2500",
-    change: "+5.24",
-    profitRank: 2,
-  },
-  {
-    symbol: "SOL",
-    name: "SOL/USD",
-    price: "₹120",
-    change: "-2.10",
-    profitRank: 3,
-  },
-  {
-    symbol: "NVDA",
-    name: "Nvidia Corp.",
-    price: "₹800",
-    change: "+1.50",
-    profitRank: 4,
-  },
-];
+const MOCK_MARKET = MOCK_TRADES;
 
 const AssetSidebar: React.FC = () => {
   const [search, setSearch] = useState("");

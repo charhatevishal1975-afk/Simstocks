@@ -4,10 +4,19 @@ import PortfolioView from "../Portfolio/PortfolioView";
 import TradingView from "../Trading/TradingView";
 import ProfileView from "../ProfileView";
 
+
 const DashboardPage: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<
     "home" | "portfolio" | "trading" | "profile"
   >("home");
+
+  const [selectedStock, setSelectedStock] = useState<string>("BTC");
+
+  // Add a function to handle the cross-tab redirection
+  const handleStockSelect = (symbol: string) => {
+    setSelectedStock(symbol);
+    setCurrentTab("trading"); // Redirects to Trading tab
+  };
 
   return (
     <div className="min-h-screen bg-white text-black font-sans pb-10">
@@ -55,9 +64,9 @@ const DashboardPage: React.FC = () => {
       </nav>
 
       <main className="px-6 max-w-[1400px] mx-auto">
-        {currentTab === "home" && <HomeView />}
+        {currentTab === "home" && <HomeView onStockSelect={handleStockSelect}/>}
         {currentTab === "portfolio" && <PortfolioView />}
-        {currentTab === "trading" && <TradingView />}
+        {currentTab === "trading" && <TradingView symbol={selectedStock}/>}
         {currentTab === "profile" && <ProfileView />}
       </main>
     </div>

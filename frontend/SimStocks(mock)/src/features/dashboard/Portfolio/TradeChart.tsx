@@ -9,6 +9,12 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import { STOCK_GRAPHS } from "../mockData_old";
+import selectedSymbols from "./TradeSidebar";
+
+interface TradeChartProps {
+  selectedSymbols: string[]; // The '[]' is crucial here
+}
 
 const data = [
   { name: "10:30", price: 1000, volume: 400 },
@@ -18,7 +24,7 @@ const data = [
   { name: "12:30", price: 1150, volume: 600 },
 ];
 
-const TradeChart: React.FC = () => {
+const TradeChart: React.FC<TradeChartProps> = ({ selectedSymbols }) => {
   return (
     <div className="border-[1.5px] border-black rounded-[24px] p-6 shadow-sm bg-white">
       <div className="flex justify-between items-center mb-6">
@@ -27,7 +33,7 @@ const TradeChart: React.FC = () => {
           {["Day", "Week", "Month"].map((t) => (
             <button
               key={t}
-              className={`px-4 py-1 rounded-full text-xs font-bold ${t === "Week" ? "bg-[#3B9DF2] text-white" : "text-[#3B9DF2] border border-[#3B9DF2]"}`}
+              className={`px-4 py-1 rounded-full text-xs font-bold ${t === "Day" ? "bg-[#3B9DF2] text-white" : "text-[#3B9DF2] border border-[#3B9DF2]"}`}
             >
               {t}
             </button>
